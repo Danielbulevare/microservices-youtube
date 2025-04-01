@@ -1,0 +1,18 @@
+services:	
+  #MySQL database for favorite videos
+  db_favorite_videos:
+    container_name: db_favorite_videos
+    image: mysql:latest
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: favorite_videos
+      MYSQL_USER: dan
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - mysql_favorite_videos_data:/var/lib/mysql
+
+volumes:
+  mysql_favorite_videos_data:
