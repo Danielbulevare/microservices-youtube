@@ -28,6 +28,9 @@ public class CFavoriteVideo {
 	@Column(nullable = false)
 	private UUID id;
 	
+	@Column(nullable = false)
+	private UUID userId;
+	
 	@NotBlank(message = "Por favor especifica el id del video.")
 	@Length(max = 100, message = "El id del video ha superado los 100 caracteres.")
 	@Column(unique = true)
