@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
 import com.dan.favorite_videos_microservice.entities.CFavoriteVideo;
+import com.dan.favorite_videos_microservice.error.CVideoAlreadyExistException;
 import com.dan.favorite_videos_microservice.request.RFavoriteVideo;
 import com.dan.favorite_videos_microservice.service.IFavoriteVideoService;
 
@@ -24,7 +25,7 @@ public class CFavoriteVideoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
-	public Optional<CFavoriteVideo> saveVideo(@Valid @RequestBody RFavoriteVideo favoriteVideo){
+	public Optional<CFavoriteVideo> saveVideo(@Valid @RequestBody RFavoriteVideo favoriteVideo)throws CVideoAlreadyExistException{
 		return favoriteVideoService.saveVideo(CFavoriteVideo.builder()
 				.videoId(favoriteVideo.videoId())
 				.userId(favoriteVideo.userId())
