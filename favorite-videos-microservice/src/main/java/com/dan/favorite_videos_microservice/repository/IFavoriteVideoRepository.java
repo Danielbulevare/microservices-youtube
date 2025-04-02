@@ -5,9 +5,9 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.dan.favorite_videos_microservice.entities.CFavoriteVideos;
+import com.dan.favorite_videos_microservice.entities.CFavoriteVideo;
 
 @Repository
-public interface IFavoriteRepository extends JpaRepository<CFavoriteVideos, UUID>{
+public interface IFavoriteVideoRepository extends JpaRepository<CFavoriteVideo, UUID>{
 
 }

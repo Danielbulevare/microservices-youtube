@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CFavoriteVideos {
+public class CFavoriteVideo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(nullable = false)
