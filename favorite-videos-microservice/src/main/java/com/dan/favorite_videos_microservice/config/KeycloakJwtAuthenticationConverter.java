@@ -43,7 +43,7 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
         // Extraer roles específicos de un cliente (en caso de que los uses en lugar de realm roles)
         Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
         if (resourceAccess != null) {
-            Map<String, Object> clientRoles = (Map<String, Object>) resourceAccess.get("microservice-store_client");
+            Map<String, Object> clientRoles = (Map<String, Object>) resourceAccess.get("microservices-youtube-client");
             if (clientRoles != null && clientRoles.containsKey("roles")) {
                 roles.addAll((List<String>) clientRoles.get("roles"));
             }
