@@ -14,5 +14,44 @@ services:
     volumes:
       - mysql_favorite_videos_data:/var/lib/mysql
 
+  #PostgreSQL database for Keycloak
+#  db-keycloak:
+#    container_name: db-keycloak
+#    image: postgres:latest
+#    restart: unless-stopped
+#    environment:
+#      POSTGRES_DB: db_keycloak
+#      POSTGRES_USER: dan
+#      POSTGRES_PASSWORD: 123
+#    ports:
+#      - 5435:5432
+#    volumes:
+#      - postgres_keycloak_data:/var/lib/postgresql/data
+
+  #Keycloak
+#  keycloak:
+#    container_name: keycloak
+#    image: quay.io/keycloak/keycloak:21.0.2
+#    restart: unless-stopped
+#    command: ["start-dev"]
+#    ports:
+#      - 8181:8181
+#    depends_on:
+#      - db-keycloak
+#    environment:
+#      DB_VENDOR: POSTGRES
+#      DB_ADDR: db-keycloak
+#      DB_DATABASE: db_keycloak
+#      DB_PORT: 5432
+#      DB_USER: dan
+#      DB_PASSWORD: 123
+#      KEYCLOAK_ADMIN: admin
+#      KEYCLOAK_ADMIN_PASSWORD: admin
+#      KC_HTTP_PORT: 8181
+#    volumes:
+#      - keycloak_data:/opt/keycloak/data
+
 volumes:
   mysql_favorite_videos_data:
+#  postgres_keycloak_data:
+#  keycloak_data:
