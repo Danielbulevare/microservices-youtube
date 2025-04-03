@@ -43,6 +43,11 @@ public class CFavoriteVideoServiceImplementation implements IFavoriteVideoServic
 	public long totalUserVideos(UUID userId) {
 		return favoriteVideoRepository.countByUserId(userId);
 	}
+
+	@Override
+	public void deleteFavoriteVideo(UUID id) {
+		favoriteVideoRepository.deleteById(id);
+	}
 	
 	
 }

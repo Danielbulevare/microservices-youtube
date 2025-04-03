@@ -11,4 +11,5 @@ public interface IFavoriteVideoService {
 	Optional<CFavoriteVideo> saveVideo(CFavoriteVideo favoriteVideo) throws CVideoAlreadyExistException;
 	List<CFavoriteVideo> findUserVideos(UUID userId, int page, int records);
 	long totalUserVideos(UUID userId);
+	void deleteFavoriteVideo(UUID id);
 }
