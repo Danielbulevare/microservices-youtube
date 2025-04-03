@@ -1,8 +1,12 @@
 package com.dan.favorite_videos_microservice.controller;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +29,22 @@ public class CFavoriteVideoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
-	public Optional<CFavoriteVideo> saveVideo(@Valid @RequestBody RFavoriteVideo favoriteVideo)throws CVideoAlreadyExistException{
-		return favoriteVideoService.saveVideo(CFavoriteVideo.builder()
-				.videoId(favoriteVideo.videoId())
-				.userId(favoriteVideo.userId())
-				.title(favoriteVideo.title())
-				.url(favoriteVideo.url())
-				.build());
+	public Optional<CFavoriteVideo> saveVideo(@Valid @RequestBody RFavoriteVideo favoriteVideo)
+			throws CVideoAlreadyExistException {
+		return favoriteVideoService.saveVideo(CFavoriteVideo.builder().videoId(favoriteVideo.videoId())
+				.userId(favoriteVideo.userId()).title(favoriteVideo.title()).url(favoriteVideo.url()).build());
+	}
+
+	@GetMapping("/{userId}/{page}/{records}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<CFavoriteVideo> findUserVideos(@PathVariable UUID userId, @PathVariable int page,
+			@PathVariable int records) {
+		return favoriteVideoService.findUserVideos(userId, page, records);
+	}
+	
+	@GetMapping("/{userId}")
+	@ResponseStatus(HttpStatus.OK)
+	public long totalUserVideos(@PathVariable UUID userId) {
+		return favoriteVideoService.totalUserVideos(userId);
 	}
 }
