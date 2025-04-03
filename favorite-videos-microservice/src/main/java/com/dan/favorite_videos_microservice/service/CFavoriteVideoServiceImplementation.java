@@ -1,9 +1,13 @@
 package com.dan.favorite_videos_microservice.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dan.favorite_videos_microservice.entities.CFavoriteVideo;
@@ -27,6 +31,17 @@ public class CFavoriteVideoServiceImplementation implements IFavoriteVideoServic
 			throw new CVideoAlreadyExistException("El video que intentas registrar ya existe.");
 		}
 		
+	}
+
+	@Override
+	public List<CFavoriteVideo> findUserVideos(UUID userId, int page, int records) {
+		Pageable pageable = PageRequest.of(page, records);
+		return favoriteVideoRepository.findByUserId(userId, pageable).toList();
+	}
+
+	@Override
+	public long totalUserVideos(UUID userId) {
+		return favoriteVideoRepository.countByUserId(userId);
 	}
 	
 	
