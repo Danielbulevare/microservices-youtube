@@ -39,6 +39,7 @@
 		<module>discovery-server-microservices-youtube</module>
 		<module>api-gateway-microservices-youtube</module>
 		<module>favorite-videos-microservice</module>
+		<module>identity-microservice</module>
 	</modules>
 	
 	<dependencies>
