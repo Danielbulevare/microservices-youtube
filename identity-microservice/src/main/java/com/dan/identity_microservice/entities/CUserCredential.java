@@ -52,10 +52,10 @@ public class CUserCredential {
 	private String email;
 	
 	@NotBlank(message = "Por favor especifica la contraseña.")
-	@Length(max = 100, message = "La contraseña ha superado los 100 cracteres.")
+	@Length(max = 255, message = "La contraseña ha superado los 255 cracteres.")
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
-	@NotBlank(message = "Por favor especifica el rol.")
+	@Column(nullable = false)
 	private ERole role;
 }
