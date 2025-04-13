@@ -37,8 +37,20 @@ public class AuthController {
 	@PostMapping("/token")
 	@ResponseStatus(HttpStatus.OK)
 	public String generateToken(@RequestBody RAuthRequest authRequest) {
+		/*
+		 * Le decimos al authenticationManager que por favor autentique el usuario y contraseña;
+		 * te estoy dando el nombre de usuario y contraseña para que realices esta autenticación. Si
+		 * encuentras que el usuario esta presente en mi BD con las credenciales que te acabo de decir,
+		 * entonces devuelveme el token.
+		 * 
+		 * Ahora, el administrador de autenticación necesita hablar con mi BD, por lo que necesita la
+		 * ayuda de alguien (UserDetailService). Asi que no basta con solo poner esta declaración en el
+		 * código para autenticar al usuario. Necesitamos definir una clase UserDetailService que se
+		 * conectara a la BD
+		 */
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.userName(), authRequest.password()));
 		
+		//Si la auntenticacion es correcta, devuelve el token
 		if(authentication.isAuthenticated()) {			
 			return authService.generateToken(authRequest.userName());
 		}else {
@@ -49,6 +61,12 @@ public class AuthController {
 	@GetMapping("/validate")
 	@ResponseStatus(HttpStatus.OK)
 	public boolean validateToken(@RequestParam("token") String token) {
+		/*
+		 * Si no hay excepciones, devolvera un true indicando que el token es válido. Si ocurre una
+		 * excepción, se obtendra el valor correcto del error, es decir si el token de validación
+		 * no tiene un valor correcto, obtendrá la excepción, pero si es correcto obtendrás el true
+		 * como respuesta
+		 */
 		authService.validateToken(token);
 		return true;
 	}

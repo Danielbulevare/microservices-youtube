@@ -15,29 +15,43 @@ import java.util.Map;
 
 @Component
 public class CJwtService {
+	
 	/*
-	 * Se deberia declarar como: private static final, pero por cuestiones de didacticas se hizo así.
+	 * Se deberia declarar como: private static final, pero por cuestiones didacticas se hizo así.
+	 * El secreto es de 32 bits.
+	 * No se debe de poner harcodeado en el codigo ni en ningún archivo que este a la vista de todos,
+	 * por eso lo declare así para pasarselo como variable de entorno, por cuestiones didacticas.
 	 */
 	@Value("${secret.key.jwt}")
 	private String secret;
 	
 	public void validateToken(final String token) {
+		/*
+		 * Este método valida el token
+		 */
         Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);
     }
 
 
     public String generateToken(String userName) {
+    	/*
+    	 * Este método genera el token
+    	 */
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userName);
     }
 
     private String createToken(Map<String, Object> claims, String userName) {
+    	/*
+    	 * Este método crea el token.
+    	 * Los claims son la carga util de encabezados y firma lo que se de desde la entrada
+    	 */
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(userName)
+                .setSubject(userName) //Nombre del usuaurio
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
-                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) //Fecha expiración del token
+                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact(); //Tipo de algoritmo utilizado para cifrar el token
     }
 
     private Key getSignKey() {

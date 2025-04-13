@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.dan.identity_microservice.entities.CUserCredential;
 
 public class CustomUserDetails implements UserDetails {
+	//Elusuario y contraseña son los atributos que queremos vincular
 	private String userName;
 	private String password;
 

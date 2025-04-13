@@ -9,6 +9,10 @@ import java.util.function.Predicate;
 @Component
 public class RouteValidator {
 
+	/*
+	 * Especificamos que si la solicitud viene de alguno de estos endpoints, ignora la validación del
+	 * token, ya que estos endpoints se pueden usuar libremente por cualquier cliente
+	 */
     public static final List<String> openApiEndpoints = List.of(
             "/auth/register",
             "/auth/token",

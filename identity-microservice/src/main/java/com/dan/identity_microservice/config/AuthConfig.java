@@ -22,6 +22,12 @@ public class AuthConfig {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
+		/*
+		 * Crea tu propio servicio de detalle de usuario que se conectará a la BD, y le dará la info.
+		 * al proveedor de atenticación, y el proveedor de autenticación puede conectarse nuevamente
+		 * al el proveedor de autenticación puede conectarse nuevamente al administrador de autenticación.
+		 * Así es como puede autenticar.
+		 */
 		return new CustomUserDetailsService();
 	}
 
@@ -45,6 +51,10 @@ public class AuthConfig {
 	
 	@Bean
     public AuthenticationProvider authenticationProvider(){
+		/*
+		 * Método necesario para autenticar el usuario y contraseña. Al proveedor de autenticación
+		 * le estoy el detalle de usuario y el decodificador de la contraseña
+		 */
         DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -53,6 +63,9 @@ public class AuthConfig {
 
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+		/*
+		 * Método necesario para autenticar el usuario y contraseña
+		 */
 		return config.getAuthenticationManager();
 	}
 }

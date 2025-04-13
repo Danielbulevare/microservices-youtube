@@ -19,7 +19,17 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		/*
+		 * Nos obliga a a sobrecargar este método. Asi que tomando este nombre de usuario, ve i verifica
+		 * en la BD si tienes a ese usuario o no, luego devuelvelo.
+		 */
 		Optional<CUserCredential> credential =  credentialRepository.findByName(userName);
+		
+		/*
+		 * Una vez que tengamos al usuario, pero como el tipo de retorno es UserDetails, por lo que
+		 * necesitamos convertir al objeto credential a UserDetails, para esto se crea una clase que
+		 * extienda de UserDetails
+		 */
 		return credential.map(CustomUserDetails::new).orElseThrow(()-> new UsernameNotFoundException("Usuario no encontrado: "+userName));
 	}
 

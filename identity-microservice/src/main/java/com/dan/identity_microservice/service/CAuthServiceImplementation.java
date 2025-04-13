@@ -29,11 +29,17 @@ public class CAuthServiceImplementation implements IAuthService{
 
 	@Override
 	public String generateToken(String userName) {
+		/*
+		 * Para generar el token necesita su nombre de usuario
+		 */
 		return jwtService.generateToken(userName);
 	}
 
 	@Override
 	public void validateToken(String token) {
+		/*
+		 * Este método valida el token dado
+		 */
 		jwtService.validateToken(token);
 	}
 }
