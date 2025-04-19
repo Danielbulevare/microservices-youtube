@@ -12,6 +12,10 @@ import java.io.IOException;
 
 @Component
 public class GatewayHeaderFilter extends OncePerRequestFilter {
+	/*
+	 * Esta clase es un filtro que valida que la peticion venga desde el API Gateway y no
+	 * directamnete desde el puerto donde se ejecuta el microservicio 
+	 */
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

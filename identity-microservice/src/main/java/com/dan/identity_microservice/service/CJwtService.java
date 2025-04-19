@@ -39,6 +39,7 @@ public class CJwtService {
     	 * Este método genera el token
     	 */
         Map<String, Object> claims = new HashMap<>();
+        claims.put("roles", List.of("ROLE_USER"));
         return createToken(claims, userName);
     }
 
