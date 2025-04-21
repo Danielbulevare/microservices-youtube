@@ -48,6 +48,7 @@ public class AuthController {
 		 * código para autenticar al usuario. Necesitamos definir una clase UserDetailService que se
 		 * conectara a la BD
 		 */
+		
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.userName(), authRequest.password()));
 		
 		//Si la auntenticacion es correcta, devuelve el token

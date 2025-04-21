@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dan.identity_microservice.entities.CUserCredential;
+import com.dan.identity_microservice.enums.ERole;
 import com.dan.identity_microservice.repository.IUserCredentialRepository;
 
 @Service
@@ -32,7 +33,9 @@ public class CAuthServiceImplementation implements IAuthService{
 		/*
 		 * Para generar el token necesita su nombre de usuario
 		 */
-		return jwtService.generateToken(userName);
+		Optional<CUserCredential> user = userCredentialRepository.findByName(userName);
+		
+		return jwtService.generateToken(userName, user.get().getRole());
 	}
 
 	@Override

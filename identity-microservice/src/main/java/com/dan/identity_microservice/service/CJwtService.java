@@ -8,6 +8,8 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.dan.identity_microservice.enums.ERole;
+
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,12 +36,12 @@ public class CJwtService {
     }
 
 
-    public String generateToken(String userName) {
+    public String generateToken(String userName, ERole role) {
     	/*
     	 * Este método genera el token
     	 */
         Map<String, Object> claims = new HashMap<>();
-        claims.put("roles", List.of("ROLE_USER"));
+        claims.put("roles", List.of("ROLE_" + role));
         return createToken(claims, userName);
     }
 
