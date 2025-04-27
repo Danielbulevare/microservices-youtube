@@ -14,10 +14,10 @@ services:
     volumes:
       - mysql_favorite_videos_data:/var/lib/mysql
 
-  #MariaDB database for Users credentials
+  #MySQL database for Users credentials
   db_users_credentials:
     container_name: db_users_credentials
-    image: mariadb:latest
+    image: mysql:latest
     restart: unless-stopped
     ports:
       - 3307:3306
@@ -27,8 +27,8 @@ services:
       MYSQL_USER: dan
       MYSQL_PASSWORD: 1234
     volumes:
-      - mariadb_user_credential_data:/var/lib/mysql
+      - mysql_user_credential_data:/var/lib/mysql
 
 volumes:
   mysql_favorite_videos_data:
-  mariadb_user_credential_data:
+  mysql_user_credential_data:
