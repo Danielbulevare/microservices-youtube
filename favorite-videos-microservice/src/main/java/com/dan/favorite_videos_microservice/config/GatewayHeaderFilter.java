@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -16,6 +17,9 @@ public class GatewayHeaderFilter extends OncePerRequestFilter {
 	 * Esta clase es un filtro que valida que la peticion venga desde el API Gateway y no
 	 * directamnete desde el puerto donde se ejecuta el microservicio 
 	 */
+	
+	@Value("${url.api.gateway}")
+	private String urlApiGateway;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -26,7 +30,7 @@ public class GatewayHeaderFilter extends OncePerRequestFilter {
         String forwardedHost = request.getHeader("X-Forwarded-Host");
 
         // Permite solo si la petición viene del API Gateway
-        if (forwardedHost == null || !forwardedHost.contains("localhost:8080")) {
+        if (forwardedHost == null || !forwardedHost.contains(urlApiGateway)) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN, "⛔ Acceso solo permitido desde el API Gateway");
             return;
         }
